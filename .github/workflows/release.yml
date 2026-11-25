@@ -5,6 +5,8 @@ on:
     tags:
       - '[0-9]+.[0-9]+.[0-9]+'
 
+permissions: {} # lock everything by default; jobs grant what they need
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,9 +20,10 @@ jobs:
 
       - name: Setup Java and Gradle
         id: setup-java-gradle
-        uses: ConsenSys/github-actions/java-setup-gradle@main
+        uses: Consensys-Incorporated/github-actions/java-setup-gradle@d7118b7e3733bac9a7f92f05f02f18c73892d5ad # 2.2.0
         with:
-          DISTRIBUTION: 'adopt'
+          DISTRIBUTION: 'temurin'
+          VERSION: '21'
 
       - name: Get the version
         id: get_version
