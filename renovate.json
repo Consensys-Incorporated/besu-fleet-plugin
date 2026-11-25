@@ -3,27 +3,56 @@
   "extends": [
     "config:recommended"
   ],
-  "enabledManagers": ["github-actions", "gradle", "gradle-wrapper"],
+  "enabledManagers": [
+    "github-actions",
+    "gradle",
+    "gradle-wrapper"
+  ],
   "dependencyDashboard": false,
   "packageRules": [
     {
       "description": "Pin all GitHub Actions to SHA digests",
-      "matchManagers": ["github-actions"],
+      "matchManagers": [
+        "github-actions"
+      ],
       "pinDigests": true,
       "minimumReleaseAge": "7 days",
       "groupName": "Renovatebot GHA Updates"
     },
     {
+      "description": "Allow immediate updates for Consensys-Incorporated/github-actions",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "matchPackageNames": [
+        "Consensys-Incorporated/github-actions{/,}**"
+      ],
+      "minimumReleaseAge": "0 days"
+    },
+    {
       "description": "Group all Gradle wrapper updates into a single PR",
-      "matchManagers": ["gradle-wrapper"],
+      "matchManagers": [
+        "gradle-wrapper"
+      ],
       "minimumReleaseAge": "7 days",
       "groupName": "Renovatebot Gradle Wrapper Updates"
     },
     {
       "description": "Group all Gradle dependency updates into a single PR",
-      "matchManagers": ["gradle"],
+      "matchManagers": [
+        "gradle"
+      ],
       "minimumReleaseAge": "7 days",
       "groupName": "Renovatebot Gradle Updates"
     }
-  ]
+  ],
+  "schedule": [
+    "before 6am on monday"
+  ],
+  "vulnerabilityAlerts": {
+    "labels": [
+      "security"
+    ]
+  },
+  "osvVulnerabilityAlerts": true
 }
